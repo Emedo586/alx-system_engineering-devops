@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# This is a comment line
+# The first line tells the shell which interpreter to use
+# The next line prints a message to the user
+echo "The content of the file /etc/passwd is:"
+# The next line uses the cat command to display the file content
+cat /etc/passwd

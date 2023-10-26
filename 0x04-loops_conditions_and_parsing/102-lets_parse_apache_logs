@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script uses awk to extract the IP and HTTP code from the apache-access.log file
+# It prints the output in a list format as IP HTTP_CODE
+# Parses the Apache logs.
+awk -F' ' '{print $1 " " $9}' apache-access.log

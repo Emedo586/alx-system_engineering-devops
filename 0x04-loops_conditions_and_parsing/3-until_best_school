@@ -1,17 +1,14 @@
 #!/usr/bin/env bash
-# A bash script that displays best school 10 times using until loop
+# Script that displays best school 10 times using until loop
 
 # Initialize a counter variable
-counter=0
+counter=1
 
 # Loop until count reaches 10
-until [ $counter -eq 10 ]
+until [ "$counter" -gt 10 ]
 do
-  # Display the message
-  echo "Best school"
-  
-  # Increment the counter by 1
-  counter=$((counter+1))
+	# Display the message
+	echo "Best school"
+	# Increment the counter by 1
+	counter=$(( counter+1 ))
 done
-
-exit 0

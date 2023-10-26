@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Script that displays "Best School" 10 times using a "while loop".
 
-counter=0
+counter=1
 message="Best School"
-while [ $counter -lt 10 ]
-do
-  echo $message
-  (( counter++ ))
-done
+while [ "$counter" -le 10 ]
+	do
+		echo $message
+		counter=$(( counter +  1 ))
+	done
