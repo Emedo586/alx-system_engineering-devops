@@ -1,41 +1,46 @@
-#!/usr/bin/env bash
-# Manages the script manage_my_process.
-#   When passed the argument `start`:
-#     1. Starts manage_my_process
-#     2. Creates a file containings its PID in /var/run/my_process.pid
-#     3. Displays "manage_my_process started"
-#   When passed the argument `stop`:
-#     1. Stops manage_my_process
-#     2. Deletes the file /var/run/my_process.pid
-#     3. Displays "manage_my_process stopped"
-#   When passed the argument `restart`:
-#     1. Stops manage_my_process
-#     2. Deletes the file /var/run/my_process.pid
-#     3. Starts manage_my_process
-#     4. Creates a file containing its PID in /var/run/my_process.pid
-#     5. Displays "manage_my_process restarted"
-#   If any other or no arguments are passed, displays
-#+  "Usage: manage_my_process {start|stop|restart}"
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
-if [ "${1}" == "start" ]
-then
-./manage_my_process &
-touch /var/run/my_process.pid
-echo "$!" > /var/run/my_process.pid
-echo "manage_my_process started"
-elif [ "${1}" == "stop"
-then
-echo "manage_my_process stopped"
-kill "$(cat /var/run/my_process.pid)"
-rm /var/run/my_process.pid
-elif [ "${1}" == "restart" ]
-then
-kill "$(cat /var/run/my_process.pid)"
-rm /var/run/my_process.pid
-./manage_my_process &
-touch /var/run/my_process.pid
-echo "$!" > /var/run/my_process.pid
-echo "manage_my_process restarted"
+/**
+ * infinite_while - Runs an infinite while loop.
+ *
+ * Return: Always 0 on success.
+ */
+int infinite_while(void)
+{
+while (1)
+{
+sleep(1);
+}
+return (0);
+}
+
+/**
+ * main - Creates five zombie processes.
+ *
+ * Return: Always 0.
+ */
+int main(void)
+{
+pid_t pid;
+char counter = 0;
+
+while (counter < 5)
+{
+pid = fork();
+if (pid > 0)
+{
+printf("Zombie process created, PID: %d\n", pid);
+sleep(1);
+counter++;
+}
 else
-echo "Usage: manage_my_process {start|stop|restart}"
-fi
+exit(0);
+}
+infinite_while();
+	
+return (EXIT_SUCCESS);
+}
