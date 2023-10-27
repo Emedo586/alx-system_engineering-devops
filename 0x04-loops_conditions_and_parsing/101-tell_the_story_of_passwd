@@ -1,9 +1,19 @@
 #!/usr/bin/env bash
 # Read /etc/passwd file line by line using while loop + IFS
-while IFS=: read -r USER_NAME PASSWORD USER_ID GROUP_ID USER_ID_INFO HOME_DIRECTORY COMMAND
+while IFS=: read -r contents
 do
-  # Display the formatted output
-  echo "The user $USER_NAME is part of the $GROUP_ID gang, lives in $HOME_DIRECTORY and rides $COMMAND."
-  echo "$USER_ID's place is protected by the passcode $PASSWORD, more info about the user here: $USER_ID_INFO"
-  echo # Add a blank line for readability
-done < /etc/passwd # Redirect the file to the loop
+	user=$(echo "$contents" | cut -f 1 -d ':')
+	password=$(echo "$contents" | cut -f 2 -d ':')
+	uid=$(echo "$contents" | cut -f 3 -d ':')
+	gid=$(echo "$contents" | cut -f 4 -d ':')
+	u_info=$(echo "$contents" | cut -f 5 -d ':')
+	home=$(echo "$contents" | cut -f 6 -d ':')
+	command=$(echo "$contents" | cut -f 7 -d ':')
+        
+	 # Display the formatted output
+	 echo -n "The user $user is part of the $gid gang, "
+	 echo -n "lives in $home and rides $command."
+	 echo -n "$uid's place is protected by the passcode $password, "
+	 echo "more info about the user here: $u_info"
+        # The next line uses the cat command to display the file content
+done < "/etc/passwd"
