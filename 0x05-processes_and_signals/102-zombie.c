@@ -41,6 +41,6 @@ else
 exit(0);
 }
 infinite_while();
-	
+
 return (EXIT_SUCCESS);
 }
