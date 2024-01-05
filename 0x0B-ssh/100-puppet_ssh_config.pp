@@ -9,6 +9,7 @@ content =>"
         #SSH client configuration
         host*
         IdentityFile ~/.ssh/school
-        PasswordAuthentication no
+	PasswordAuthentication no
+	",
 
 }
