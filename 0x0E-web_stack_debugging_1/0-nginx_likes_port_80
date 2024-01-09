@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
+# Removing the default nginx con-file
+rm /etc/nginx/sites-enabled/default
 # Configuring and debugging nginx port 80
-sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+#sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 #Restart nginx
-sudo service nginx restart
+service nginx restart
