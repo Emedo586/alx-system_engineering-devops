@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Creating a symbolic link between nginx con-file and the enabled sites-dir,
+# The -f link is added to ln to forcefully replace the file if it exists
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+# restart nginx
+sudo service nginx restart
+rm /run/nginx.pid
+# Termination of the first nginx process ID
+# kill "$(pgrep 'nginx' | head -1)"
