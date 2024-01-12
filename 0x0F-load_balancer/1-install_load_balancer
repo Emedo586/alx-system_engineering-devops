@@ -28,5 +28,5 @@ echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
 # Testing the HAproxy configuration file
 sudo haproxy -c -f /etc/haproxy/haproxy.cfg
 
-# Restart the Nginx service
+# Restart the Haproxy service
 sudo service haproxy restart
