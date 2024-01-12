@@ -1,31 +1,18 @@
 #!/usr/bin/env bash
-# Commands to install Nginx with the following configurations:
-#+    Listens on port 80.
-#+    Returns a page containing "Hello World!" when queried
-#++    at the root with a curl GET request.
+# Commands to install Nginx on Web-Sever-01
 
-#  updates the package lists for available software packages.
+# Updating Packages before making Installations
 sudo apt-get update
-# installs the Nginx web server.
-sudo apt-get install -y nginx
+sudo apt-get -y install nginx
 
-# Creates the /etc/nginx/html directory, which will serve as the document root directory for Nginx.
-mkdir /etc/nginx/html
-#  creates an empty index.html file inside the /etc/nginx/html directory.
-touch /etc/nginx/html/0-index.html
-#  sets the content of the index.html file to "Hello World!" using the echo command.
-echo "Hello World!" | sudo tee /var/www/html/0-index.html
-# Testing and Configuring nginx
+# Configuring the Uncomplicated Firewall (UFW) to allow incoming traffic for the Nginx HTTP service
+sudo ufw allow 'Nginx HTTP'
+
+# Creating an index.html page
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Testing Nginx configurations for Syntax errors
 sudo nginx -t
-# Sets Nginx to listen on port 80 and serve files from the /etc/nginx/html directory.
-printf %s "server {
-     listen      80;
-     listen      [::]:80 default_server;
-     root        /etc/nginx/html;
-     index       index.html index.htm;
-}
-" > /etc/nginx/sites-available/default
 
-# Reload the Nginx service to apply the configuration changes.
-service nginx reload
-
+# Restarting Nginx
+sudo service nginx start
