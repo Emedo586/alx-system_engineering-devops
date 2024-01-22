@@ -1,0 +1,23 @@
+!#/usr/bin/env bash
+# To activate ufw, run the following command if it is not already enabled:
+sudo ufw enable
+
+# To prevent any incoming traffic from accessing your system,
+# run the command that sets the default incoming policy to ‘deny’:
+sudo ufw default deny incoming
+
+# Set the default outgoing policy to "allow" to allow  all outgoing traffic by running:
+sudo ufw default allow outgoing
+
+# Permit incoming traffic on TCP ports 22, 443, and 80 by running:
+
+sudo ufw allow 22/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 80/tcp
+
+# Verify that the rules have been added by running:
+
+sudo ufw status
+
+# Finally, enable ufw by running:
+sudo ufw enable
